@@ -7,6 +7,7 @@ import datetime as dt
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import scipy.integrate as integrate
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.uic import loadUi
 from tensorflow import keras
@@ -34,7 +35,7 @@ def HDR(folders_path,img_shape=(800,450)):
         if not dirs: #make sure at the bottom level the directory
             #read image files into a list
             img_list=[]
-            for i in range(3):
+            for i in range(len(files)):
                 path = os.path.join(hdr_folders_path,root,files[i]) #concatenate parts into a file path
                 img_list.append(cv2.imread(path))
                 img_list[i] = cv2.resize(img_list[i],img_shape) #reduce processing time
@@ -89,3 +90,15 @@ def grid_cropping(img_folder,destination,shape=(800,450), d_h=150,d_w=100):
     temp.to_csv(os.path.join(destination, "log_book.csv"),index=False)
     del temp
     print("Cropping was done!")
+    
+def rh_calculator(T_am,T_dew):
+    #This function takes ambient temperature and dew point, then calculate the relative humidity(RH) of the atmosphere at surface level.
+    '''
+           6.1078 * Exp( (17.27 * Td) / (237.3 + Td) )
+     Rh=   ──────────────────────────────────────────────* 100%
+           6.112  * Exp( (17.67 * T) / (243.5 + T) )
+    '''
+    numerator = 6.1078*np.exp((17.27*T_dew)/(237.3+T_am))
+    denominator = 6.112*np.exp((17.67*T_am)/(243.5+T_am))
+    
+    return numerator/denominator
