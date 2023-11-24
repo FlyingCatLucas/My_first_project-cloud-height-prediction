@@ -1,5 +1,5 @@
-First commit of code.
-This zone contains separated functions for main working area.
+#First commit of code.
+#This zone contains separated functions for main working area.
 
 #load packages
 import os, sys,cv2,re
