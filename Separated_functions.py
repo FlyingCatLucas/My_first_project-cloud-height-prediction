@@ -65,22 +65,23 @@ def grid_cropping(img_folder,destination,shape=(800,450), d_h=150,d_w=100):
         filename_root = re.findall("\S+(?=\.)",s)
 
         #cropping
-        for i in range(h_span):
-            for j in range(w_span):
+        for i in range(h_span+1):
+            for j in range(w_span+1):
                 filename = filename_root[0] + "_" + str(i) + "_" + str(j) +".jpg"
                 filename = os.path.join(destination,filename)
                 cv2.imwrite(filename, img[i*d_h:(i+1)*d_h-1,j*d_w:(j+1)*d_w-1])
     
     #create a log_file for gathering other info
     cropped_file_list = os.listdir(destination)
-    temp = {"window_name":cropped_file_list,"t_amb":"", "t_dew":"","qnh":"","cloud_height":"","lux":""} #add column names
+    temp = {"window_name":cropped_file_list,"t_amb":"", "t_dew":"","qnh":"",
+            "cloud_height":"","lux":"","hh_z":"","is_ROI":""} #add column names
     temp = pd.DataFrame(temp)
     temp.to_csv(os.path.join(destination, "log_book.csv"),index=False)
     del temp
     print("Cropping was done!")
     
 def rh_calculator(T_am,T_dew):
-    #This function takes ambient temperature and dew point, then calculate the relative humidity(RH) of the atmosphere at surface level.
+    #This function takes ambient temperature and dew point, then calculate the relative humidity(RH) of the atmosphere, at surface level.
     '''
            6.1078 * Exp( (17.27 * Td) / (237.3 + Td) )
      Rh=   ──────────────────────────────────────────────* 100%
@@ -90,3 +91,21 @@ def rh_calculator(T_am,T_dew):
     denominator = 6.112*np.exp((17.67*T_am)/(243.5+T_am))
     
     return numerator/denominator
+
+def regression_history_plot(train_history):
+    #This function takes keras training history, and then plots training loss history.
+    os.environ["KMP_DUPLICATE_LIB_OK"] = "True" #temporary skip conflicting issue of matlibplot
+    plt.plot(train_history.history['loss'])
+    plt.plot(train_history.history['val_loss'])
+    plt.ylabel('loss',labelpad=5)
+    plt.xlabel('epoch',labelpad=5)
+    plt.legend(['train','validation'])
+    plt.show()
+    os.environ["KMP_DUPLICATE_LIB_OK"] = "False" #restore setting
+    
+def draw_img(img):
+    #draw images with given label(can be filename, categorical factor, etc.)
+    plt.imshow(img)
+    plt.axis('off')
+    plt.show()
+    return
