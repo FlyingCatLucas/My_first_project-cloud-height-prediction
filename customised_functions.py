@@ -1,15 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#This section defines a few customised function.
+#This section defines a few customised functions.
 '''
 The following functions are carefully designed. Some functions that might be repetitively called, 
 or optional functionalities are seperated from the main section. Also, these functions might share
 a few parameters with main section. Carefully define them will save some space.
 '''
+
+import os, sys, cv2, re
+import datetime as dt
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 #HDR Process
 def HDR(folders_path,img_shape=(800,450)):
@@ -115,6 +115,5 @@ def normalise_1D_array(array):
     #a quick method to calculate 1D array to save space in main section
     a_max = np.max(array)
     a_min = np.min(array)
-    diff = a_max - a_min
-    return (array-a_min)/diff
+    return (array-a_min)/(a_max - a_min)
 

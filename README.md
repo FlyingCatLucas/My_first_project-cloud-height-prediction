@@ -14,5 +14,11 @@ Software of this project.
 The platform of the software is Linux-based OS, Raspien. Functions were written in Python.
 
 
-(More info will be provided later on)
+More about model1:
+
+It is a naive attempt. I tried using a simple CNN for regressin to predict the heights of clouds.
+
+As one can check the result in Jupyter file, a simple CNN has the ability to learn the cloud pattern and height.
+
+This model serves as a basic, some ideas proposed will be tested in model 2 ~ model 4.
 
