@@ -1,8 +1,9 @@
-#First commit of code.
-#This zone contains separated functions for main working area.
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[ ]:
 
 
-#----------------------------------------------------------------------
 #This section defines a few customised function.
 '''
 The following functions are carefully designed. Some functions that might be repetitively called, 
@@ -24,7 +25,7 @@ def HDR(folders_path,img_shape=(800,450)):
             #read image files into a list
             img_list=[]
             for i in range(len(files)):
-                path = os.path.join(hdr_folders_path,root,files[i]) #concatenate parts into a file path
+                path = os.path.join(folders_path,root,files[i]) #concatenate parts into a file path
                 img_list.append(cv2.imread(path))
                 img_list[i] = cv2.resize(img_list[i],img_shape) #reduce processing time
         
@@ -104,8 +105,16 @@ def regression_history_plot(train_history):
     os.environ["KMP_DUPLICATE_LIB_OK"] = "False" #restore setting
     
 def draw_img(img):
-    #draw images with given label(can be filename, categorical factor, etc.)
+    #quick tool for display images
     plt.imshow(img)
     plt.axis('off')
     plt.show()
     return
+
+def normalise_1D_array(array):
+    #a quick method to calculate 1D array to save space in main section
+    a_max = np.max(array)
+    a_min = np.min(array)
+    diff = a_max - a_min
+    return (array-a_min)/diff
+
