@@ -14,11 +14,13 @@ Software of this project.
 The platform of the software is Linux-based OS, Raspien. Functions were written in Python.
 
 
-More about model1:
+More about model2:
 
-It is a naive attempt. I tried using a simple CNN regression to predict the heights of clouds.
+Model 2 uses a SVM classifier to predict if a image is region of interest(ROI).
 
-As one can check the result in the Jupyter file, a simple CNN has the ability to learn the cloud patterns and linked them to cloud height.
+Afterward, I put those images predicted as ROI into a regression CNN model.
 
-This model serves as a base line, some ideas proposed will be tested in model 2 ~ model 4.
+However, the performence of the model was not good enough. Some intuitive guess were written in the Jupyter notebook file.
+
+As a result of poor performence, the develop of this structure was teminated.
 
