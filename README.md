@@ -1,24 +1,11 @@
 # My_first_project-cloud-height-predict
-My first project with Github and Python.
+More about model2:
 
-The goal of this project.
+Model 2 uses a SVM classifier to predict if a image is region of interest(ROI).
 
-I try to use Convolutional Neural Network, with Keras API, to perform regression, to see if I can create a device, with a CNN model, that can estimate the height of clouds.
+Afterward, I put those images predicted as ROI into a regression CNN model.
 
-Hardware used in this project.
+However, the performence of the model was not good enough. Some intuitive guess were written in the Jupyter notebook file.
 
-Hardware part includes a Raspberry Pi 4B 4GB, a portable charger, and a Infrared 680(pass) filter.
-
-Software of this project.
-
-The platform of the software is Linux-based OS, Raspien. Functions were written in Python.
-
-
-More about model1:
-
-It is a naive attempt. I tried using a simple CNN regression to predict the heights of clouds.
-
-As one can check the result in the Jupyter file, a simple CNN has the ability to learn the cloud patterns and linked them to cloud height.
-
-This model serves as a base line, some ideas proposed will be tested in model 2 ~ model 4.
+As a result of poor performence, the develop of this structure was teminated.
 
